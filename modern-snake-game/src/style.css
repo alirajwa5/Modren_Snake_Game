@@ -1,0 +1,179 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0; /* Light gray background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  color: #333; /* Default text color */
+}
+
+#game-container {
+  position: relative; /* For positioning overlays */
+  text-align: center;
+  background-color: #fff; /* White background for the game area */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  margin-bottom: 15px;
+  display: flex; /* For aligning h1 and mute button */
+  justify-content: space-between; /* Push h1 and mute button to opposite ends */
+  align-items: center; /* Vertically align items in header */
+}
+
+header h1 {
+  margin: 0; /* Remove default margins */
+  font-size: 2.5em;
+  color: #34C759; /* Snake green color */
+}
+
+.header-button { /* Style for buttons in the header, like Mute */
+  background-color: #e9e9e9;
+  color: #333;
+  padding: 8px 15px;
+  font-size: 0.9em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: 1px solid #ccc;
+}
+
+.header-button:hover {
+  background-color: #dcdcdc;
+}
+
+.header-button.muted {
+  background-color: #ff9500; /* Orange to indicate muted state */
+  color: white;
+}
+
+#score-board {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+#score-board span {
+  padding: 5px 10px;
+  background-color: #e9e9e9;
+  border-radius: 5px;
+}
+
+canvas {
+  border: 1px solid #ddd; /* Lighter border for the canvas */
+  display: block; 
+  margin: 0 auto;
+  background-color: #f9f9f9; /* Very light canvas background */
+}
+
+/* Overlays Styling */
+.controls-overlay,
+.message-overlay {
+  position: absolute;
+  top: 0; /* Cover the entire game-container area */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque */
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in width/height */
+  border-radius: 10px; /* Match game-container */
+  text-align: center;
+  z-index: 10; /* Above canvas */
+  opacity: 0; /* Default to hidden for transitions */
+  visibility: hidden; /* Default to hidden for transitions */
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s; /* Visibility transition after opacity */
+}
+
+.message-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0s; /* Visibility transition immediately */
+}
+
+
+/* Specific styling for controls-overlay if it's just for buttons like pause */
+/* The #ui-controls will only show the pause button during 'PLAYING' */
+#ui-controls {
+  /* This is not a full overlay, so transition logic might be different if applied */
+  /* For now, it's simple display block/none from JS */
+  top: auto; /* Override full overlay behavior if desired for specific placement */
+  bottom: 30px; /* Example: place pause button container at the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto; /* Fit content */
+  height: auto;
+  background-color: transparent; /* No background for this specific control bar */
+  padding: 0;
+  box-shadow: none;
+}
+
+
+.message-overlay h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.message-overlay p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* Button Styling */
+button {
+  background-color: #34C759; /* Snake green */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  background-color: #2aa347; /* Darker green */
+}
+
+button:active {
+  transform: scale(0.98); /* Slight press effect */
+}
+
+/* Specific button adjustments if needed */
+#pause-button {
+  background-color: #ff9500; /* Orange for pause */
+}
+#pause-button:hover {
+  background-color: #e08500;
+}
+
+#resume-game-button, #resume-button {
+   background-color: #007aff; /* Blue for resume */
+}
+#resume-game-button:hover, #resume-button:hover {
+   background-color: #005bb5;
+}
+
+#play-again-button, #restart-button, #start-game-initial-button, #start-button {
+  /* Uses default green */
+  margin-top: 10px; /* Add some space if multiple elements in overlay */
+}
+
+/* Hide elements by default if their display is managed by JS */
+  /* This is already done inline in HTML (style="display: none;"),
+   but can be reinforced here or managed purely by adding/removing a class. */
+/* Example of a generic hidden class if needed elsewhere, but overlays use .visible */
+.hidden {
+  display: none !important;
+}

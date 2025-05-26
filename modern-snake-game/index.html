@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Snake Game</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Modern Snake</h1>
+            <div id="score-board">
+                <span>Score: <span id="current-score">0</span></span>
+                <span>High Score: <span id="high-score">0</span></span>
+            </div>
+            <button id="mute-button" class="header-button">Mute</button> <!-- Mute Button -->
+        </header>
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI Controls - Primarily for in-game actions like Pause -->
+        <div id="ui-controls" class="controls-overlay" style="display: none;">
+            <button id="pause-button">Pause</button>
+            <!-- Resume button might be part of a paused message overlay instead -->
+        </div>
+
+        <!-- Start Screen Message Overlay -->
+        <div id="start-screen-message" class="message-overlay"> <!-- Initially visible -->
+            <h2>Welcome to Modern Snake!</h2>
+            <p>Use Arrow Keys or WASD to move. Press P to Pause.</p>
+            <button id="start-game-initial-button">Start Game</button>
+        </div>
+
+        <!-- Paused Message Overlay -->
+        <div id="paused-message" class="message-overlay">
+            <h2>Paused</h2>
+            <button id="resume-game-button">Resume</button>
+        </div>
+
+        <!-- Game Over Message Overlay -->
+        <div id="game-over-message" class="message-overlay">
+            <h2>Game Over!</h2>
+            <p>Your score: <span id="final-score">0</span></p>
+            <button id="play-again-button">Play Again</button>
+        </div>
+
+        <!-- Note: The original spec had start-button, pause-button, resume-button, restart-button in #ui-controls.
+             I've simplified this for clarity:
+             - #start-game-initial-button for the very first start.
+             - #pause-button (becomes visible when playing).
+             - #resume-game-button (in the paused message).
+             - #play-again-button (in the game over message, effectively a restart).
+             This approach makes each overlay self-contained with its primary action.
+        -->
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

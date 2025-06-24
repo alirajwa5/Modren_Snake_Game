@@ -1,83 +1,158 @@
+/* Global Styles */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light gray background, common in Google apps */
+    font-family: 'Arial', sans-serif; /* Fallback, Roboto would be ideal if linkable */
+    color: #333; /* Default text color */
 }
 
-.game-container {
-    text-align: center;
-    background-color: #fff;
+#gameArea {
+    display: flex; /* To help manage screens, though only one is visible at a time */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Max width for the game area */
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
-canvas {
-    border: 1px solid #ccc;
-    background-color: #eee; /* Light gray background for the canvas */
-    display: block; /* Remove extra space below canvas */
-    margin: 0 auto 10px; /* Center canvas and add some margin below */
-}
-
-.score-container {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.game-over-screen {
-    background-color: rgba(0, 0, 0, 0.75);
-    color: white;
-    position: absolute; /* Changed to absolute to overlay */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border-radius: 10px;
+/* Screen Management */
+.screen {
+    width: 100%;
     text-align: center;
-    z-index: 10; /* Ensure it's above the canvas */
+    background-color: #ffffff; /* White background for screen content areas */
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: none; /* Hidden by default */
 }
 
-.game-over-screen h2 {
-    margin-top: 0;
+.screen.active {
+    display: flex; /* Use flex for centering content within the screen */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.game-over-screen button {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
+/* Typography */
+.game-title {
+    font-size: 3em;
+    color: #4285F4; /* Google Blue */
+    margin-bottom: 30px;
 }
 
-.game-over-screen button:hover {
-    background-color: #45a049;
+.game-over-title {
+    font-size: 2.5em;
+    color: #EA4335; /* Google Red */
+    margin-bottom: 15px;
 }
 
-.start-screen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    z-index: 20; /* Ensure it's above everything else initially */
-}
-
-.start-screen h2 {
-    margin-top: 0;
-    font-size: 2em;
-}
-
-.start-screen p {
+.final-score-text {
     font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.score-hud {
+    font-size: 1.5em;
+    color: #5f6368; /* Darker gray for HUD text */
+    margin-bottom: 15px;
+    position: absolute; /* Position score over the canvas area */
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 15px;
+    border-radius: 15px;
+    z-index: 5;
+}
+
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px; /* More rounded buttons */
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    gap: 8px; /* Space between icon and text */
+}
+
+.btn svg {
+    width: 20px; /* Consistent icon size */
+    height: 20px;
+}
+
+.btn-primary {
+    background-color: #4285F4; /* Google Blue */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3367D6; /* Darker Google Blue */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-secondary { /* Example for a potential menu button */
+    background-color: #e0e0e0; /* Light gray */
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #d0d0d0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-icon { /* For icon-only buttons like settings/pause */
+    padding: 10px;
+    border-radius: 50%; /* Circular for icon buttons */
+    background-color: #f0f0f0;
+}
+
+.btn-icon svg {
+    fill: #5f6368; /* Icon color */
+}
+
+.btn-icon:hover {
+    background-color: #e0e0e0;
+}
+
+/* Game Canvas Specifics */
+#gamePlayScreen {
+    position: relative; /* For positioning score HUD and potential pause button */
+    padding: 10px; /* Reduce padding to give canvas more space */
+}
+
+canvas#gameCanvas {
+    background-color: #e8e8e8; /* Slightly off-white for the game board itself */
+    border: 1px solid #d0d0d0; /* Subtle border for the canvas */
+    display: block; /* Remove extra space below canvas */
+    margin: 0 auto; /* Center canvas */
+    border-radius: 4px; /* Slightly rounded corners for the canvas */
+}
+
+/* Specific Screen Adjustments */
+#startScreen h1.game-title {
+    margin-top: 0;
+}
+
+#gameOverScreen .btn-primary {
+    background-color: #34A853; /* Google Green for Play Again */
+}
+#gameOverScreen .btn-primary:hover {
+    background-color: #2c8b47; /* Darker Google Green */
+}
+
+/* Ensure game area itself doesn't have a conflicting background if screens are transparent */
+#gameArea > .screen {
+    background-color: #ffffff; /* Ensure screens have a solid white background */
 }

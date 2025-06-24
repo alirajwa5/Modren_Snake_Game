@@ -3,23 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Snake Game</title>
+    <title>Snake</title> <!-- Simplified title -->
     <link rel="stylesheet" href="style.css">
+    <!-- Consider adding a link to a Google Font if environment allows, e.g., Roboto -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> -->
 </head>
 <body>
-    <div class="game-container">
-        <canvas id="gameCanvas"></canvas>
-        <div class="score-container">
-            Score: <span id="score">0</span>
+    <div id="gameArea">
+        <!-- Start Screen -->
+        <div id="startScreen" class="screen active">
+            <h1 class="game-title">Snake</h1>
+            <button id="playButton" class="btn btn-primary">
+                <!-- SVG Play Icon (Material Design style) -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                Play
+            </button>
+            <!-- Placeholder for settings button -->
+            <!-- <button id="settingsButton" class="btn btn-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+                </svg>
+            </button> -->
         </div>
-        <div id="gameOverScreen" class="game-over-screen" style="display: none;">
-            <h2>Game Over!</h2>
-            <p>Your score: <span id="finalScore">0</span></p>
-            <button id="restartButton">Restart Game</button>
+
+        <!-- Game Canvas Screen (initially hidden) -->
+        <div id="gamePlayScreen" class="screen" style="display: none;">
+            <div class="score-hud">Score: <span id="scoreDisplay">0</span></div>
+            <canvas id="gameCanvas"></canvas>
+             <!-- Placeholder for pause button -->
+            <!-- <button id="pauseButton" class="btn btn-icon pause-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+            </button> -->
         </div>
-        <div id="startScreen" class="start-screen">
-            <h2>Simple Snake</h2>
-            <p>Press any arrow key to start!</p>
+
+        <!-- Game Over Screen (initially hidden) -->
+        <div id="gameOverScreen" class="screen" style="display: none;">
+            <h2 class="game-over-title">Game Over!</h2>
+            <p class="final-score-text">Your score: <span id="finalScoreDisplay">0</span></p>
+            <button id="restartButton" class="btn btn-primary">
+                 <!-- SVG Replay Icon (Material Design style) -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                </svg>
+                Play Again
+            </button>
+            <!-- <button id="menuButton" class="btn btn-secondary">Menu</button> -->
         </div>
     </div>
     <script src="script.js"></script>
